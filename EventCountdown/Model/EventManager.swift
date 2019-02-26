@@ -31,6 +31,16 @@ struct EventManager {
         let eventsTemp = events.sorted(by: { $0.eventTime < $1.eventTime })
         setEvents(events: eventsTemp)
     }
+    
+    mutating func removeEventAt(index: Int) {
+        events.remove(at: index)
+        setEvents(events: events)
+    }
+    
+    mutating func editEventAt(index: Int, event : Event) {
+        events[index] = event
+        setEvents(events: events)
+    }
 
     private mutating func setEvents(events: [Event]) {
         if let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: events, requiringSecureCoding: false) {

@@ -11,6 +11,7 @@ import UIKit
 class PickEventViewController: UIViewController {
 
     var delegate : AddingEvents?
+    var index: Int?
     var eventTextField : EventTextField!
     var datePicker : EventDatePicker!
     var confirmEventButton : ConfirmEventButton!
@@ -27,6 +28,9 @@ class PickEventViewController: UIViewController {
     
     func addDatePicker() {
         datePicker = EventDatePicker()
+        if let index = index {
+            datePicker.date = EventManager.shared.events[index].eventTime
+        }
         self.view.addSubview(datePicker)
         addDatePickerConstraints()
     }
@@ -34,8 +38,10 @@ class PickEventViewController: UIViewController {
     
     func addTextEdit() {
         eventTextField = EventTextField()
+        if let index = index {
+            eventTextField.text = EventManager.shared.events[index].eventName
+        }
         eventTextField.placeholder = "Event"
-        eventTextField.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(eventTextField)
         addTextFieldConstraints()
     }
@@ -54,7 +60,12 @@ class PickEventViewController: UIViewController {
             floorDate.floorSeconds()
             if floorDate > Date().addingTimeInterval(60) {
                 // logic
-                EventManager.shared.addEvent(event: Event(eventName: eventText, eventTime: floorDate))
+                let event = Event(eventName: eventText, eventTime: floorDate)
+                if let index = index {
+                    EventManager.shared.editEventAt(index: index, event: event)
+                } else {
+                    EventManager.shared.addEvent(event: event)
+                }
                 delegate?.refreshTableView()
                 self.navigationController?.popViewController(animated: true)
             } else {

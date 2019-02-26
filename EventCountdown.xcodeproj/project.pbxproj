@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BC739E9B4B9EEF011CFE7F7 /* Pods_EventCountdown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB17976D91251EEE7DF9EF39 /* Pods_EventCountdown.framework */; };
 		542DCD9422241815009BE694 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542DCD9322241815009BE694 /* Event.swift */; };
 		54450A2B2222CDD5005BCD55 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54450A2A2222CDD5005BCD55 /* EventManager.swift */; };
 		54450A2D2222D838005BCD55 /* PickEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54450A2C2222D838005BCD55 /* PickEventViewController.swift */; };
@@ -34,6 +35,9 @@
 		5491C63922217D0E0039070C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5491C63B22217D0E0039070C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5491C6432221A9BD0039070C /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		A4B4018654DEFE9ADCBF40C6 /* Pods-EventCountdown.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventCountdown.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EventCountdown/Pods-EventCountdown.debug.xcconfig"; sourceTree = "<group>"; };
+		AB17976D91251EEE7DF9EF39 /* Pods_EventCountdown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EventCountdown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E70901190EADF2425AFF2D50 /* Pods-EventCountdown.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventCountdown.release.xcconfig"; path = "Pods/Target Support Files/Pods-EventCountdown/Pods-EventCountdown.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,12 +45,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BC739E9B4B9EEF011CFE7F7 /* Pods_EventCountdown.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F0AAB6DEFC7C1AC1270E60B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB17976D91251EEE7DF9EF39 /* Pods_EventCountdown.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		54450A292222CDA4005BCD55 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +74,8 @@
 			children = (
 				5491C62E22217D050039070C /* EventCountdown */,
 				5491C62D22217D050039070C /* Products */,
+				B2A0FA3AA85D6540B8AD13A8 /* Pods */,
+				4F0AAB6DEFC7C1AC1270E60B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +121,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B2A0FA3AA85D6540B8AD13A8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A4B4018654DEFE9ADCBF40C6 /* Pods-EventCountdown.debug.xcconfig */,
+				E70901190EADF2425AFF2D50 /* Pods-EventCountdown.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -113,9 +137,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5491C63E22217D0E0039070C /* Build configuration list for PBXNativeTarget "EventCountdown" */;
 			buildPhases = (
+				9F38BB6636E982D1557108E2 /* [CP] Check Pods Manifest.lock */,
 				5491C62822217D040039070C /* Sources */,
 				5491C62922217D040039070C /* Frameworks */,
 				5491C62A22217D040039070C /* Resources */,
+				FDB27EBB1D8B75E6C083F7B1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -170,6 +196,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9F38BB6636E982D1557108E2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EventCountdown-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FDB27EBB1D8B75E6C083F7B1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-EventCountdown/Pods-EventCountdown-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EventCountdown/Pods-EventCountdown-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5491C62822217D040039070C /* Sources */ = {
@@ -320,6 +393,7 @@
 		};
 		5491C63F22217D0E0039070C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4B4018654DEFE9ADCBF40C6 /* Pods-EventCountdown.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -338,6 +412,7 @@
 		};
 		5491C64022217D0E0039070C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E70901190EADF2425AFF2D50 /* Pods-EventCountdown.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

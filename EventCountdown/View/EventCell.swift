@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class EventCell: UITableViewCell {
-    
+//class EventCell: UITableViewCell {
+class EventCell: SwipeTableViewCell {
+
+
     var timer: Timer?
     var endTimeInSeconds: TimeInterval?
     

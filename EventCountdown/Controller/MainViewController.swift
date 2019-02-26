@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwipeCellKit
 
 protocol AddingEvents {
     func refreshTableView()
@@ -23,9 +24,14 @@ class MainViewController: UITableViewController {
     }
     
     @objc func addEvent(){
+        navigateToPickEvent(index: nil)
+    }
+    
+    func navigateToPickEvent(index: Int?) {
         let pickEventVC = PickEventViewController()
+        pickEventVC.index = index
         pickEventVC.delegate = self
-        self.navigationController?.pushViewController(pickEventVC, animated: true)
+        navigationController?.pushViewController(pickEventVC, animated: true)
     }
     
     func refreshTableView() {
@@ -33,7 +39,7 @@ class MainViewController: UITableViewController {
     }
 }
 
-extension MainViewController: AddingEvents {
+extension MainViewController: AddingEvents, SwipeTableViewCellDelegate {
     
     private func prepareNavBar() {
         let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEvent))
@@ -54,8 +60,30 @@ extension MainViewController: AddingEvents {
         cell.dateLabel.text = EventManager.shared.events[indexPath.row].eventTime.toString(withFormat:
             "EEEE, d MMMM yyyy h:mm a")
         cell.endTimeInSeconds = EventManager.shared.events[indexPath.row].eventTime.timeIntervalSince1970
+        cell.delegate = self
         cell.configureCell()
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigateToPickEvent(index: indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            EventManager.shared.removeEventAt(index: indexPath.row)
+            action.fulfill(with: .delete)
+        }
+        deleteAction.image = UIImage(named: "delete")
+        return [deleteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .destructive
+        options.transitionStyle = .border
+        return options
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -87,10 +115,12 @@ extension EventCell {
         self.countDownLabel.text = getRemainingTimeString(seconds: getRemainingSeconds)
         if timer == nil {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {
-                [weak self]timer in
+                [weak self] _ in
                 guard let self = self else {return}
                 if self.getRemainingSeconds <= 0 {
                     self.countDownLabel.textColor = UIColor.red
+                    self.timer?.invalidate()
+                    self.timer = nil
                 } else {
                     self.countDownLabel.text = self.getRemainingTimeString(seconds: self.getRemainingSeconds)
                 }
